@@ -19,7 +19,7 @@ const CreateQuote = () => {
   const userData: any = localStorage.getItem('userData');
   const checkUserData = () => {
     JSON.parse(userData).quote
-      ? setQuote(JSON.parse(userData).quote.quote)
+      ? setQuote(JSON.parse(userData).quote.quoteTxt)
       : setQuote('');
   };
 

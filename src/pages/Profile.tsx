@@ -45,6 +45,13 @@ const Profile = () => {
     myQuotesList();
   }, []);
 
+  const mostLiked = myQuote.filter((quote) => quote.vote > 1);
+  const likedQuote = myQuote.filter((quote) => quote.vote > 0);
+
+  const mostRecent = myQuote.sort(
+    (a, b) => b.quote.created_at - a.quote.created_at
+  );
+
   const myVoteNumber = (vote: object[]): number => {
     let voteSum = 0;
     vote.forEach((vote: any) => (vote.vote === 1 ? voteSum++ : (voteSum += 0)));
@@ -115,43 +122,49 @@ const Profile = () => {
         </Header>
         <QuoteContainer>
           <QuoteList>
-            <h5 className='quote-state'>Most liked quotes</h5>
-            {myQuote.filter((quote) => {
-              <Quote
-                key={quote.id}
-                id={quote.id}
-                vote={myVoteNumber(quote.votes)}
-                quote={quote.quote}
-                user={`${quote.user.first_name} ${quote.user.last_name}`}
-                userId={quote.user.id}
-              />;
-            })}
+            <>
+              <h5 className='quote-state'>Most liked quotes</h5>
+              {mostLiked.map((quote) => {
+                <Quote
+                  key={quote.id}
+                  id={quote.id}
+                  vote={myVoteNumber(quote.votes)}
+                  quote={quote.quote}
+                  user={`${quote.user.first_name} ${quote.user.last_name}`}
+                  userId={quote.user.id}
+                />;
+              })}
+            </>
           </QuoteList>
           <QuoteList>
-            <h5 className='quote-state'>Most recent</h5>
-            {myQuote.filter((quote) => {
-              <Quote
-                key={quote.id}
-                id={quote.id}
-                vote={myVoteNumber(quote.votes)}
-                quote={quote.quote}
-                user={`${quote.user.first_name} ${quote.user.last_name}`}
-                userId={quote.user.id}
-              />;
-            })}
+            <>
+              <h5 className='quote-state'>Most recent</h5>
+              {mostRecent.map((quote) => {
+                <Quote
+                  key={quote.id}
+                  id={quote.id}
+                  vote={myVoteNumber(quote.votes)}
+                  quote={quote.quote}
+                  user={`${quote.user.first_name} ${quote.user.last_name}`}
+                  userId={quote.user.id}
+                />;
+              })}
+            </>
           </QuoteList>
           <QuoteList>
-            <h5 className='quote-state'>Liked</h5>
-            {myQuote.filter((quote) => {
-              <Quote
-                key={quote.id}
-                id={quote.id}
-                vote={myVoteNumber(quote.votes)}
-                quote={quote.quote}
-                user={`${quote.user.first_name} ${quote.user.last_name}`}
-                userId={quote.user.id}
-              />;
-            })}
+            <>
+              <h5 className='quote-state'>Liked</h5>
+              {likedQuote.map((quote) => {
+                <Quote
+                  key={quote.id}
+                  id={quote.id}
+                  vote={myVoteNumber(quote.votes)}
+                  quote={quote.quote}
+                  user={`${quote.user.first_name} ${quote.user.last_name}`}
+                  userId={quote.user.id}
+                />;
+              })}
+            </>
           </QuoteList>
         </QuoteContainer>
       </ProfileDiv>
