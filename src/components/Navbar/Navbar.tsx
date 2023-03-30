@@ -13,13 +13,14 @@ import QoutesLogo from '../../images/QoutesLogo.png';
 import Arrow from '../../images/LinkArrow.png';
 import QuoteAdd from '../../images/bi_plus.png';
 import { OrangeButton, WhiteButton } from '../../styles/main.styled';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import UserImg from '../../images/UserImage.png';
 
 const Navigation = () => {
   const [navOpen, setNavOpen] = useState(false);
-  const userLogged = localStorage.getItem('userLogged');
-
+  const userLogged = localStorage.getItem('userLogged'); 
+  
+  let navigate = useNavigate();
   return (
     <>
       <NavbarContainer>
@@ -28,7 +29,11 @@ const Navigation = () => {
           <Line className={navOpen === true ? 'bar2' : ''} />
           <Line className={navOpen === true ? 'bar3' : ''} />
         </Hamburger>
-        <QuoteLogo src={QoutesLogo} navOpen={navOpen} />
+        <QuoteLogo
+          src={QoutesLogo}
+          navOpen={navOpen}
+          onClick={() => navigate('/')}
+        />
 
         {userLogged === 'true' ? (
           <NavigationLinks navOpen={navOpen}>
@@ -36,7 +41,7 @@ const Navigation = () => {
               style={{ marginRight: '16px' }}
               className='image'
               onClick={() => {
-                redirect('/me');
+                navigate('/profile');
                 setNavOpen(false);
               }}>
               <img src={UserImg} />
@@ -44,27 +49,27 @@ const Navigation = () => {
             <Links
               style={{ margin: 0 }}
               className='hideAdd'
-              onClick={() => redirect('/me/myquote')}>
+              onClick={() => navigate('/createQuote')}>
               <AddQuote src={QuoteAdd} />
             </Links>
 
             <Links
               onClick={() => {
-                redirect('/');
+                navigate('/');
                 setNavOpen(false);
               }}>
               <>Home</> <LinkArrow className='hide' src={Arrow} />
             </Links>
             <Links
               onClick={() => {
-                redirect('/me');
+                navigate('/profileSettings');
                 setNavOpen(false);
               }}>
               Settings <LinkArrow className='hide' src={Arrow} />
             </Links>
             <Links
               onClick={() => {
-                redirect('/');
+                navigate('/');
                 setNavOpen(false);
               }}>
               Logout <LinkArrow className='hide' src={Arrow} />
@@ -75,7 +80,7 @@ const Navigation = () => {
             <Links
               className='hide'
               onClick={() => {
-                redirect('/');
+                navigate('/');
                 setNavOpen(false);
               }}>
               <div>Home</div> <LinkArrow src={Arrow} />
@@ -84,14 +89,14 @@ const Navigation = () => {
             <OrangeButton
               /* style={{ width: '100%' }} */
               onClick={() => {
-                redirect('/signup');
+                navigate('/signup');
                 setNavOpen(false);
               }}>
               Sign Up
             </OrangeButton>
             <WhiteButton
               onClick={() => {
-                redirect('/login');
+                navigate('/login');
                 setNavOpen(false);
               }}>
               Login

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import QuoteMain from '../images/QuotesMain.png';
-import UpvotedImg from '../images/UpvotedImg.png';
 import {
   Container,
   Header1,
@@ -22,13 +21,15 @@ import {
 } from '../styles/main.styled';
 import FooterDiv from '../components/Footer/Footer';
 import Navigation from '../components/Navbar/Navbar';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import Quote from '../components/Quote/Quote';
+
 const Main = () => {
   const [quotes, setQuotes] = useState<any[]>([]);
   const [votedQuotes, setVotedQuotes] = useState<any[]>([]);
   const userLogged = localStorage.getItem('userLogged');
+  let navigate = useNavigate();
 
   const getQuotes = async () => {
     const quoteResponse = await axios.get('/quotes');
@@ -84,7 +85,7 @@ const Main = () => {
                   vote={sumVotes(showRandomQuote.vote)}
                   user={`${showRandomQuote.user.firstName} ${showRandomQuote.user.lastName}`}
                   userId={showRandomQuote.user.id}
-                  quote={showRandomQuote.quote}
+                  quote={showRandomQuote.quote.quoteTxt}
                 />
               ) : (
                 <Quote
@@ -108,7 +109,7 @@ const Main = () => {
                   Quotastic is free online platform for you to explore the
                   quips, quotes, and proverbs. Sign up and express yourself.
                 </Text>
-                <OrangeButton onClick={() => redirect('/signup')}>
+                <OrangeButton onClick={() => navigate('/signup')}>
                   Sign Up
                 </OrangeButton>
               </LeftBox>
@@ -174,7 +175,7 @@ const Main = () => {
         ) : null}
         <WhiteButtonLarge
           style={{ marginBottom: '102px' }}
-          onClick={() => redirect('/signup')}>
+          onClick={() => navigate('/signup')}>
           Sign up to see more
         </WhiteButtonLarge>
       </Container>

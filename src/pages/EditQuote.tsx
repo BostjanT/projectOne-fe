@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import UpdateUser from '../components/UpdateUser';
 import {
@@ -18,6 +18,8 @@ const EditQuote = (id: number) => {
   const [quote, setQuote] = useState<any[]>([]);
   const currentUser = localStorage.getItem('userData');
   const usersInfo = currentUser ? JSON.parse(currentUser) : '';
+
+  let navigate = useNavigate();
 
   const myQuoteText = async () => {
     const response = await axios.get(`/quotes/${id}`);
@@ -46,7 +48,7 @@ const EditQuote = (id: number) => {
         );
       }
       await UpdateUser();
-      redirect('/me');
+      navigate('/me');
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +68,7 @@ const EditQuote = (id: number) => {
         </QuoteArea>
         <QuoteButtons>
           <ConfirmBtn onClick={(e) => myQuoteList(e)}>Submit</ConfirmBtn>
-          <CancelBtn onClick={() => redirect('/me')}>Cancel</CancelBtn>
+          <CancelBtn onClick={() => navigate('/profile')}>Cancel</CancelBtn>
         </QuoteButtons>
       </QuoteContainer>
     </CenterDiv>

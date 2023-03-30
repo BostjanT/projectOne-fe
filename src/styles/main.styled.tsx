@@ -52,6 +52,7 @@ export const LeftBox = styled.div`
 
   @media screen and (max-width: 1024px) {
     max-width: 344px;
+    align-items: center;
   }
 `;
 
@@ -84,9 +85,8 @@ export const Header2 = styled.h2`
     font-weight: 400;
     font-size: 35px;
     line-height: 41px;
-    text-align: center;
     letter-spacing: 0.25px;
-    margin: 58px 78px;
+    margin: 58px 0;
   }
 `;
 

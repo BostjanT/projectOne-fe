@@ -1,15 +1,19 @@
 import React, { SyntheticEvent, useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
 import {
+  CancelBtn,
   ChangeButton,
   InputDiv,
   SetContainer,
+  SetHeader,
+  SetParagraph,
+  SetSpan,
   SubmitDiv,
 } from '../../styles/profileSettings.styled';
 import { Input, Label } from '../../styles/signup.styled';
 import UpdateUser from '../UpdateUser';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Confirm from './Confirm';
 
@@ -17,6 +21,7 @@ const ChangePassword = () => {
   const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  let navigate = useNavigate();
 
   const userData: any = localStorage.getItem('userData');
   const success = () => {
@@ -39,7 +44,7 @@ const ChangePassword = () => {
         );
         await UpdateUser();
         success();
-        redirect('/me');
+        navigate('/profile');
       } else {
         return;
       }
@@ -50,6 +55,10 @@ const ChangePassword = () => {
 
   return (
     <SetContainer>
+      <SetHeader>
+        Profile <SetSpan>settings</SetSpan>
+        <SetParagraph>Change your password</SetParagraph>
+      </SetHeader>
       <InputDiv>
         <Label>Confirm password</Label>
         <Input
@@ -81,7 +90,7 @@ const ChangePassword = () => {
         <ChangeButton className='darkOrange' onClick={(e) => changePassword(e)}>
           Submit
         </ChangeButton>
-        Cancel
+        <CancelBtn onClick={() => navigate('/profile')}>Cancel</CancelBtn>
       </SubmitDiv>
     </SetContainer>
   );

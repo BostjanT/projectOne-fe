@@ -15,6 +15,17 @@ export const SignForm = styled.form`
   align-items: center;
   margin: 0 auto;
   gap: 16px;
+
+  &.marginTop {
+    margin-top: 100px;
+  }
+  @media screen and (max-width: 1024px) {
+    padding: 2rem;
+
+    &.marginTop {
+      margin-top: 40px;
+    }
+  }
 `;
 
 export const SignFormText = styled.div`
@@ -22,12 +33,7 @@ export const SignFormText = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0px;
   gap: 8px;
-
-  /*  max-width: 420px; */
-  height: 68px;
-
   align-self: stretch;
   flex-grow: 0;
 `;
@@ -62,9 +68,7 @@ export const FormInput = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0px;
   gap: 8px;
-
   align-self: stretch;
 `;
 export const FormInputDouble = styled.div`

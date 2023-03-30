@@ -1,5 +1,5 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react';
-import { redirect } from 'react-router-dom';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import UpdateUser from '../components/UpdateUser';
 import {
@@ -17,8 +17,11 @@ import { Orange } from '../styles/main.styled';
 const CreateQuote = () => {
   const [quote, setQuote] = useState('');
   const userData: any = localStorage.getItem('userData');
+  let navigate = useNavigate();
+
   const checkUserData = () => {
-    JSON.parse(userData).quote
+    /* JSON.parse(userData).quote */
+    JSON.parse(userData)
       ? setQuote(JSON.parse(userData).quote.quoteTxt)
       : setQuote('');
   };
@@ -28,7 +31,7 @@ const CreateQuote = () => {
     UpdateUser();
   }, []);
 
-  const createQuote = async (e: SyntheticEvent) => {
+  const createMyQuote = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
       await axios.post(
@@ -42,7 +45,7 @@ const CreateQuote = () => {
       );
       await UpdateUser();
     } catch (error) {
-      if (error === 401) redirect('/login');
+      if (error === 401) navigate('/login');
     }
   };
   return (
@@ -58,11 +61,11 @@ const CreateQuote = () => {
         <QuoteButtons>
           <ConfirmBtn
             onClick={(e) => {
-              createQuote(e);
+              createMyQuote(e);
             }}>
             Submit
           </ConfirmBtn>
-          <CancelBtn onClick={() => redirect('/me')}>Cancel</CancelBtn>
+          <CancelBtn onClick={() => navigate('/profile')}>Cancel</CancelBtn>
         </QuoteButtons>
       </QuoteContainer>
     </CenterDiv>

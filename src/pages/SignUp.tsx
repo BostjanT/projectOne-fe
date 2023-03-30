@@ -20,14 +20,15 @@ import Footer from '../components/Footer/Footer';
 import BlankUser from '../images/BlankUser.svg';
 import Navigation from '../components/Navbar/Navbar';
 import axios from '../api/axios';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFistName] = useState('');
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
-
+  let navigate = useNavigate();
+  
   const signUp = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (password === rePassword) {
@@ -38,9 +39,9 @@ const SignUp = () => {
         password,
         rePassword,
       });
-      redirect('/login');
+      navigate('/login');
     } else {
-      return;
+      console.log('some error');
     }
   };
   return (
@@ -104,8 +105,8 @@ const SignUp = () => {
             <OrangeButton onClick={(e) => signUp(e)}>Sign Up</OrangeButton>
             <HaveAccount>
               <>Already have an account?</>
-              <OrangeTextBtn onClick={() => redirect('/login')}>
-                Sign in
+              <OrangeTextBtn onClick={() => navigate('/login')}>
+                Log in
               </OrangeTextBtn>
             </HaveAccount>
           </SignForm>

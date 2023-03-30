@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import {
   CancelBtn,
   ChangeButton,
@@ -13,12 +13,13 @@ import {
 import { Input, Label } from '../styles/signup.styled';
 import axios from '../api/axios';
 import UpdateUser from '../components/UpdateUser';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileSettings = () => {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  let navigate = useNavigate();
 
   const changeUserInfo = async (e: SyntheticEvent) => {
     try {
@@ -32,7 +33,7 @@ const ProfileSettings = () => {
         }
       );
       await UpdateUser();
-      redirect('/me');
+      navigate('/profile');
     } catch (error) {}
   };
   return (
@@ -71,7 +72,7 @@ const ProfileSettings = () => {
         </InputDiv>
       </DoubleInput>
       <DoubleInput>
-        <ChangeButton onClick={() => redirect('')}>
+        <ChangeButton onClick={() => navigate('/changePassword')}>
           Change password
         </ChangeButton>
         <ChangeButton className='darkOrange'>
@@ -85,7 +86,7 @@ const ProfileSettings = () => {
           onClick={(e) => changeUserInfo(e)}>
           Submit
         </ChangeButton>
-        <CancelBtn onClick={() => redirect('/me')}>Cancel</CancelBtn>
+        <CancelBtn onClick={() => navigate('/profile')}>Cancel</CancelBtn>
       </SubmitDiv>
     </SetContainer>
   );

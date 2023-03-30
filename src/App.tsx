@@ -15,7 +15,7 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   return (
     <>
-      <Profile />
+      <Main />
       {/* 
       <Navigation />
       

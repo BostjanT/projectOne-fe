@@ -18,10 +18,10 @@ import {
 import QouteLogoWhite from '../images/QouteLogoWhite.png';
 import UserImage from '../images/UserImage.png';
 
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import FooterDiv from '../components/Footer/Footer';
 import axios from '../api/axios';
-import Navigation from '../components/Navbar/Navbar';
+
 import Quote from '../components/Quote/Quote';
 
 const Profile = () => {
@@ -30,6 +30,7 @@ const Profile = () => {
   const [myQuote, setMyQuote] = useState<any[]>([]);
   const [myLikedQuote, setMyLikedQuote] = useState<any[]>([]);
   const userLogged = localStorage.getItem('userLogged');
+  let navigate = useNavigate();
 
   const myQuotesList = async () => {
     const response = await axios.get('/quotes');
@@ -81,11 +82,11 @@ const Profile = () => {
       <ProfileDiv>
         <Header>
           <Navbar>
-            <QuoteLogo src={QouteLogoWhite} />
+            <QuoteLogo src={QouteLogoWhite} onClick={() => navigate('/')} />
             <NavButtons>
               {userLogged === 'true' ? (
                 <>
-                  <NavLinks onClick={() => redirect('/')}>Home</NavLinks>
+                  <NavLinks onClick={() => navigate('/')}>Home</NavLinks>
                   <NavLinks>Settings</NavLinks>
                   <NavLinks>Logout</NavLinks>
                 </>
@@ -95,10 +96,10 @@ const Profile = () => {
 
               <NavUserImage
                 className='user'
-                onClick={() => redirect('/me')}></NavUserImage>
+                onClick={() => navigate('/profile')}></NavUserImage>
               <NavUserImage
                 className='addQuote'
-                onClick={() => redirect('/me')}
+                onClick={() => navigate('/createQuote')}
               />
             </NavButtons>
           </Navbar>

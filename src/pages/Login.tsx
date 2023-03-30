@@ -17,12 +17,12 @@ import { WhiteButton } from '../styles/login.styled';
 import Footer from '../components/Footer/Footer';
 import Navigation from '../components/Navbar/Navbar';
 import axios from '../api/axios';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  let navigate = useNavigate();
   const loginUser = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
@@ -35,7 +35,7 @@ const Login = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
       localStorage.setItem('userData', JSON.stringify(userResponse.data));
-      redirect('/profile');
+      navigate('/profile');
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +44,7 @@ const Login = () => {
     <>
       <SignContainer>
         <Navigation />
-        <SignForm style={{ marginTop: 100 }}>
+        <SignForm className='marginTop'>
           <SignFormText style={{ marginBottom: 16 }}>
             <FormHeader>
               Welcome<Orange> back</Orange>
@@ -73,7 +73,9 @@ const Login = () => {
           <WhiteButton onClick={(e) => loginUser(e)}>Login</WhiteButton>
           <HaveAccount>
             <>Dont have account?</>
-            <OrangeTextBtn>Sign up</OrangeTextBtn>
+            <OrangeTextBtn onClick={() => navigate('/signup')}>
+              Sign up
+            </OrangeTextBtn>
           </HaveAccount>
         </SignForm>
       </SignContainer>
