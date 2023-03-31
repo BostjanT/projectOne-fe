@@ -28,7 +28,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [rePassword, setRePassword] = useState('');
   let navigate = useNavigate();
-  
+
   const signUp = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (password === rePassword) {

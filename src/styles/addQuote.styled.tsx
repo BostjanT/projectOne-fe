@@ -14,10 +14,6 @@ export const QuoteContainer = styled.div`
   align-items: flex-start;
   padding: 32px;
   gap: 16px;
-
-  position: relative;
-  width: 593px;
-
   background: #ffffff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
@@ -51,23 +47,23 @@ export const QuoteArea = styled.textarea`
   padding: 16px 24px;
   gap: 8px;
 
-  width: 529px;
+  /* width: 529px; */
   height: 124px;
 
   background: #ffffff;
   border: 2px solid #de8667;
   border-radius: 16px;
-  flex: none;
   align-self: stretch;
   flex-grow: 0;
 `;
 
 export const QuoteButtons = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-
   background: #ffffff;
 `;
 
@@ -110,7 +106,7 @@ export const CancelBtn = styled.button`
   line-height: 19px;
   text-align: center;
   color: #322d38;
-  padding: 10.5px 0;
+  padding: 10.5px;
   margin-left: 30px;
 
   &:hover {

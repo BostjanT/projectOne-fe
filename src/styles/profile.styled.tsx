@@ -5,7 +5,7 @@ import AddQuote from '../images/addQuoteIcon.svg';
 export const ProfileDiv = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 90px);
 `;
 
 export const Header = styled.div`

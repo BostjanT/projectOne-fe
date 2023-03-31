@@ -104,10 +104,9 @@ export const SubmitDiv = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: 0px;
   margin-top: 16px;
   gap: 30px;
-
+  width: 100%;
   height: 40px;
 
   @media screen and(max-width: 1024px) {
@@ -131,5 +130,9 @@ export const CancelBtn = styled.button`
 
   &:hover {
     color: #de8667;
+  }
+
+  @media screen and(max-width: 1024px) {
+    padding: 10px;
   }
 `;

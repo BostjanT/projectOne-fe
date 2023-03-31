@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SignContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 90px);
 `;
 
 export const SignForm = styled.form`
